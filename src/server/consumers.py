@@ -3,7 +3,9 @@
 import json
 
 # pylint: disable=unused-import
-from asgiref.sync import async_to_sync, sync_to_async
+from asgiref.sync import (
+    async_to_sync,
+    sync_to_async)
 
 import httpx
 
@@ -165,11 +167,11 @@ class MasterConsumer(AsyncJsonWebsocketConsumer):
         """Use Django to encode plain JSON to handle our Payloads."""
         return json.dumps(content, cls=DjangoJSONEncoder)
 
-    ###########################################################################
-    ###                                                                     ###
-    ### CALLBACK FUNCTIONS                                                  ###
-    ###                                                                     ###
-    ###########################################################################
+    # =========================================================================
+    # ===
+    # === CALLBACK FUNCTIONS
+    # ===
+    # =========================================================================
     async def reply(self, message: dict) -> None:
         """Send the Message (Command) to the Mobile Client."""
         message["channel_name"] = self.channel_name     # Wedge in the Channel Name,
@@ -180,11 +182,11 @@ class MasterConsumer(AsyncJsonWebsocketConsumer):
         """Send the Message (Command) to the Cloud Service."""
         self.ws_client.send_message(json.dumps(message["payload"], cls=DjangoJSONEncoder))
 
-    ###########################################################################
-    ###                                                                     ###
-    ### STATIC METHODS                                                      ###
-    ###                                                                     ###
-    ###########################################################################
+    # =========================================================================
+    # ===
+    # === STATIC METHODS
+    # ===
+    # =========================================================================
     @staticmethod
     def verify_request(content: dict):
         """Verify Request."""
