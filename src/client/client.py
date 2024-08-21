@@ -7,7 +7,9 @@ import logging
 import websocket
 
 # pylint: disable=unused-import
-from asgiref.sync import async_to_sync, sync_to_async
+from asgiref.sync import (
+    async_to_sync,
+    sync_to_async)
 from django.conf import settings
 
 
@@ -40,11 +42,11 @@ class CloudService:
         """Send the Message."""
         self.ws_client.send(message)
 
-    ###########################################################################
-    ###                                                                     ###
-    ### CALLBACK FUNCTIONS FOR WEBSOCKET CLIENT                             ###
-    ###                                                                     ###
-    ###########################################################################
+    # =========================================================================
+    # ===
+    # === CALLBACK FUNCTIONS FOR WEBSOCKET CLIENT
+    # ===
+    # =========================================================================
     def __connect(self, url: str):
         """Connect to WebSocket."""
         websocket.enableTrace(True)

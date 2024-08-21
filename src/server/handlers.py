@@ -36,7 +36,8 @@ class WebsocketStreamHandler:
         self.stream = stream
         self.consumer = consumer
 
-    async def perform_receive(self, content: dict, reply_channel: str=None, **kwargs) -> None:
+    async def perform_receive(
+            self, content: dict, reply_channel: str = None, **kwargs) -> None:
         """Almost always overridden.
 
         Parameters
@@ -46,7 +47,8 @@ class WebsocketStreamHandler:
 
         """
 
-    async def perform_disconnect(self, reply_channel: str=None, code: str=None, **kwargs) -> None:
+    async def perform_disconnect(
+            self, reply_channel: str = None, code: str = None, **kwargs) -> None:
         """Override, if need to do something on Websocket Close.
 
         Parameters
@@ -73,7 +75,8 @@ class WebsocketStreamHandler:
 class PingStreamHandler(WebsocketStreamHandler):
     """Ping Stream Handler."""
 
-    async def perform_receive(self, content: dict, reply_channel: str=None, **kwargs) -> None:
+    async def perform_receive(
+            self, content: dict, reply_channel: str = None, **kwargs) -> None:
         """Ping simply responds like a Heartbeat.
 
         Parameters
@@ -103,7 +106,8 @@ class ChannelStreamHandler(WebsocketStreamHandler):
         """Constructor."""
         super().__init__( *args, **kwargs)
 
-    async def perform_receive(self, content: dict, reply_channel: str=None, **kwargs) -> None:
+    async def perform_receive(
+            self, content: dict, reply_channel: str = None, **kwargs) -> None:
         """Parse and manage the Content (Message)."""
         if content["command"] == "some_command":
             pass  # Do Something.
@@ -117,7 +121,8 @@ class ChannelStreamHandler(WebsocketStreamHandler):
             payload=content,
             invokee="cloud.reply")
 
-    async def perform_disconnect(self, reply_channel: str=None, code: str=None, **kwargs) -> None:
+    async def perform_disconnect(
+            self, reply_channel: str = None, code: str = None, **kwargs) -> None:
         """Override, if need to do something on Websocket Close.
 
         Parameters
